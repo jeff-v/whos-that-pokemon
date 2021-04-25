@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Link, Switch, Route } from 'react-router-dom';
+import GameContainer from './components/game-container/game-container';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => (
+  <div className='App h-screen'>
+    <div className='nav flex w-screen justify-center items-center space-x-7 bg-blue-500 h-20 text-white text-2xl mb-30'>
+      <Link to='/'>Easy mode</Link>
+      <Link to='/hardMode'>Hard mode</Link>
     </div>
-  );
-}
+    <div className='flex items-center flex-col h-full'>
+      <Switch>
+        <Route path='/'>
+          <GameContainer />
+        </Route>
+      </Switch>
+    </div>
+  </div>
+);
 
 export default App;
