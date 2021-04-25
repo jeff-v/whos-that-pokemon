@@ -2,30 +2,47 @@ name: Deploy to Pages
 
 on:
   push:
-    branches: 
+    branches:
       - gh-pages
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Install dependencies and build
-        run: |
-          npm i
-          npm run build
 
-      - name: Deploy to GitHub Pages
-        run: |
-          git config --global user.name $user_name
-          git config --global user.email $user_email
-          git remote set-url origin https://${github_token}@github.com/${repository}
-          npm run deploy
-        env:
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
-          repository: gh-pages
+      - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-files
+          path: ./build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+        steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: production-files
+            path: ./build
+
+        - name: Deploy to gh-pages
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./build
 
