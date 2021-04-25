@@ -3,7 +3,8 @@ name: Deploy to Pages
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: 
+      - gh-pages
     
 jobs:
   build:
