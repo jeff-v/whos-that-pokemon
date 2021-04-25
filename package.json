@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "proxy": "http://localhost",
   "private": true,
+  "homepage": "https://jeff-v.github.io/whos-that-pokemon/",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@headlessui/react": "^1.0.0",
