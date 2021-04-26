@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { nanoid } from 'nanoid';
 import { Pokemon } from '../game-container/game-container';
 import convertToTitleCase from '../../util/convertToTitleCase';
@@ -7,7 +7,9 @@ interface PreviousGuessesProps {
   pokemon: Pokemon[];
 }
 
-export default function PreviousGuesses({ pokemon }: PreviousGuessesProps) {
+export default memo(function PreviousGuesses({
+  pokemon,
+}: PreviousGuessesProps) {
   const previousPokemonJsx = pokemon
     .map((singlePokemon, index) => (
       <div key={nanoid()} className='flex flex-col'>
@@ -27,4 +29,4 @@ export default function PreviousGuesses({ pokemon }: PreviousGuessesProps) {
   }
 
   return <>{previousPokemonJsx}</>;
-}
+});

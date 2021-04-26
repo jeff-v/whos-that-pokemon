@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router';
 
 interface GameContainerProps {
   sprite: string;
   name: string;
   setSuccess: (success: boolean) => void;
+  hardMode?: boolean;
 }
 
 export default function Guesser({
   sprite,
   name,
   setSuccess,
+  hardMode,
 }: GameContainerProps) {
   const [guess, setGuess] = useState<string>('');
   const [imageAnimation, setImageAnimation] = useState<string>('');
-  const location = useLocation();
 
   function checkGuess() {
     if (guess.toLowerCase() === name.toLowerCase()) {
@@ -26,6 +26,8 @@ export default function Guesser({
       setTimeout(() => setImageAnimation(''), 1000);
     }
   }
+
+  console.log(hardMode);
 
   return (
     <div className='flex items-center h-auto mt-2'>
@@ -47,9 +49,7 @@ export default function Guesser({
       </div>
       <img
         className={`${imageAnimation} ${
-          location.pathname === '/hardMode'
-            ? 'filter saturate-0 contrast-0'
-            : ''
+          hardMode ? 'filter saturate-0 contrast-0' : ''
         }`}
         alt='sprite'
         src={sprite}

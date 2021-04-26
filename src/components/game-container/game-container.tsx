@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import pokedexApi from '../../api/pokedexApi';
 import pikaPika from '../../pikapika.mp3';
@@ -11,12 +11,17 @@ export interface Pokemon {
   number: string;
 }
 
-export default function GameContainer() {
+interface GameContainerProps {
+  hardMode?: boolean;
+}
+
+export default function GameContainer({ hardMode }: GameContainerProps) {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();
-  const [pikachuNoise] = useState<HTMLAudioElement>(new Audio(pikaPika));
+  // this element gets loaded over and over again if it's a state, so memoize it for the time being
+  const pikachuNoise = useMemo<HTMLAudioElement>(() => new Audio(pikaPika), []);
   const [successClasses, setSuccessClasses] = useState<string>('');
 
   useEffect(() => {
@@ -30,7 +35,6 @@ export default function GameContainer() {
       pokedexApi({ pokemon, setPokemon, setError });
       pikachuNoise
         .play()
-        .then(() => undefined)
         .catch((err) => console.error(err))
         .finally(() => setSuccess(false));
     }
@@ -71,6 +75,7 @@ export default function GameContainer() {
             sprite={currentPokemon?.sprite as string}
             name={currentPokemon?.name as string}
             setSuccess={setSuccess}
+            hardMode={hardMode}
           />
         )}
       </div>
