@@ -26,9 +26,5 @@ export default function PreviousGuesses({ pokemon }: PreviousGuessesProps) {
     return <></>;
   }
 
-  return (
-    <div className='flex justify-evenly items-centert pb-10'>
-      {previousPokemonJsx}
-    </div>
-  );
+  return <>{previousPokemonJsx}</>;
 }

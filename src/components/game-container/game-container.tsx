@@ -48,9 +48,9 @@ export default function GameContainer() {
     <>
       {success && <span className={`${successClasses}`}>You did it!</span>}
       {pokemon.length > 1 && (
-        <div className='bg-gray-100 min-h-15 w-screen flex justify-center items-baseline space-y-10'>
+        <div className='bg-gray-100 min-h-15 w-screen flex flex-wrap flex-row justify-center content-center items-center'>
           <button
-            className='bg-blue-500 h-20 rounded-lg align-text-center w-40 p-2 text-white font-bold self-center mr-5'
+            className='bg-blue-500 h-20 rounded-lg align-text-center w-40 p-2 text-white font-bold mr-5'
             onClick={() => setPokemon([])}
           >
             Clear Previous Guesses

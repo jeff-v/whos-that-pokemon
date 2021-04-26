@@ -19,6 +19,7 @@ export default function Guesser({
   function checkGuess() {
     if (guess.toLowerCase() === name.toLowerCase()) {
       setSuccess(true);
+      setGuess('');
     } else {
       setSuccess(false);
       setImageAnimation('animate-shake');
