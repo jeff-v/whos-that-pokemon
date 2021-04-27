@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { useState } from 'react';
 import pokedexApi from '../../api/pokedexApi';
+import { PokedexContext } from '../../App';
 import pikaPika from '../../pikapika.mp3';
 import Guesser from '../guesser/guesser';
 import PreviousGuesses from '../previous-guesses/previous-guesses';
@@ -16,11 +17,12 @@ interface GameContainerProps {
 }
 
 export default function GameContainer({ hardMode }: GameContainerProps) {
+  const { setPokedexState } = useContext(PokedexContext);
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [currentPokemon, setCurrentPokemon] = useState<Pokemon>();
-  // this element gets loaded over and over again if it's a state, so memoize it for the time being
+  // this element gets loaded over and over again if it's a state, so I'm memoizing it for the time being
   const pikachuNoise = useMemo<HTMLAudioElement>(() => new Audio(pikaPika), []);
   const [successClasses, setSuccessClasses] = useState<string>('');
 
@@ -32,13 +34,13 @@ export default function GameContainer({ hardMode }: GameContainerProps) {
   useEffect(() => {
     if (success) {
       setSuccessClasses('text-green-600 animate-bounce absolute inset-0');
-      pokedexApi({ pokemon, setPokemon, setError });
+      pokedexApi({ setPokemon, setError, setPokedexState });
       pikachuNoise
         .play()
         .catch((err) => console.error(err))
         .finally(() => setSuccess(false));
     }
-  }, [pikachuNoise, pokemon, success]);
+  }, [pikachuNoise, setPokedexState, success]);
 
   if (error) {
     return (
@@ -66,7 +68,7 @@ export default function GameContainer({ hardMode }: GameContainerProps) {
         <button
           className='rounded-md border-gray-500 cursor-auto bg-red-700 text-white p-4'
           data-testid='get-new-pokemon'
-          onClick={() => pokedexApi({ pokemon, setPokemon, setError })}
+          onClick={() => pokedexApi({ setPokemon, setError, setPokedexState })}
         >
           Get me a pokemon!
         </button>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Dispatch, SetStateAction } from 'react';
 import { Pokemon } from '../components/game-container/game-container';
 import PokemonEntry from '../types/PokemonEntry';
 
@@ -6,15 +7,15 @@ import PokemonEntry from '../types/PokemonEntry';
 const generatePokemonNumber = () => Math.floor(Math.random() * 898).toString();
 
 interface PokedexApi {
-  pokemon: Pokemon[];
-  setPokemon: (pokemon: Pokemon[]) => void;
+  setPokemon: Dispatch<SetStateAction<Pokemon[]>>;
   setError: (error: boolean) => void;
+  setPokedexState: Dispatch<SetStateAction<PokemonEntry[]>>;
 }
 
 export default function pokedexApi({
-  pokemon,
   setPokemon,
   setError,
+  setPokedexState,
 }: PokedexApi) {
   const pokemonNumber = generatePokemonNumber();
 
@@ -25,7 +26,17 @@ export default function pokedexApi({
         sprites: { front_default: sprite },
         name,
       } = res.data;
-      setPokemon([...pokemon, { sprite, name, number: pokemonNumber }]);
+      setPokemon((prevState) => [
+        ...prevState,
+        { sprite, name, number: pokemonNumber },
+      ]);
+      setPokedexState((prevState) => {
+        if (prevState[0].id === 0) {
+          return [res.data];
+        } else {
+          return [...prevState, res.data];
+        }
+      });
     })
     .catch((err) => {
       console.error(err);

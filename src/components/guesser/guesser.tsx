@@ -27,8 +27,6 @@ export default function Guesser({
     }
   }
 
-  console.log(hardMode);
-
   return (
     <div className='flex items-center h-auto mt-2'>
       <div className='flex flex-col mr-2'>

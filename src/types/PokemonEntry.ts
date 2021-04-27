@@ -99,12 +99,12 @@ interface GenerationSix {
 }
 
 interface Versions {
-  'generation-i': GenerationOne;
-  'generation-ii': GenerationTwo;
-  'generation-iii': GenerationThree;
-  'generation-iv': GenerationFour;
-  'generation-v': GenerationFive;
-  'generation-vi': GenerationSix;
+  'generation-i'?: GenerationOne;
+  'generation-ii'?: GenerationTwo;
+  'generation-iii'?: GenerationThree;
+  'generation-iv'?: GenerationFour;
+  'generation-v'?: GenerationFive;
+  'generation-vi'?: GenerationSix;
 }
 
 interface Sprite {
@@ -134,9 +134,19 @@ interface Stats {
   stat: NameAndURL;
 }
 
-interface PokemonTypes {
+interface SlotAndType {
   slot: number;
   type: NameAndURL;
+}
+
+interface PastType {
+  generation: NameAndURL;
+  types: SlotAndType[];
+}
+
+interface HeldItem {
+  item: NameAndURL;
+  version_details: NameAndURL[];
 }
 
 export default interface PokemonEntry {
@@ -145,17 +155,17 @@ export default interface PokemonEntry {
   forms: NameAndURL[];
   game_indices: GameIndex[];
   height: number;
-  held_items: unknown[];
+  held_items: HeldItem[];
   id: number;
   is_default: boolean;
   location_area_encounters: string;
   moves: Move[];
   name: string;
   order: number;
-  past_types: unknown[];
+  past_types: PastType[];
   species: NameAndURL;
   sprites: Sprite;
   stats: Stats[];
-  types: PokemonTypes;
+  types: SlotAndType[];
   weight: number;
 }
