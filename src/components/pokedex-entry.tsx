@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { nanoid } from 'nanoid';
-import { PokedexContext } from '../../App';
+import { PokedexContext } from '../App';
 import { Redirect, useParams } from 'react-router-dom';
 import { capitalCase } from 'change-case';
 

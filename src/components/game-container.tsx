@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useState } from 'react';
-import pokedexApi from '../../api/pokedexApi';
-import { PokedexContext } from '../../App';
-import pikaPika from '../../pikapika.mp3';
-import Guesser from '../guesser/guesser';
-import PreviousGuesses from '../previous-guesses/previous-guesses';
+import pokedexApi from '../api/pokedexApi';
+import { PokedexContext } from '../App';
+import pikaPika from '../pikapika.mp3';
+import Guesser from './guesser/guesser';
+import PreviousGuesses from './previous-guesses';
 
 export interface Pokemon {
   sprite: string;

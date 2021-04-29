@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { nanoid } from 'nanoid';
-import { Pokemon } from '../game-container/game-container';
+import { Pokemon } from './game-container';
 import { capitalCase } from 'change-case';
 import { Link } from 'react-router-dom';
 

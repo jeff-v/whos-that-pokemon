@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
-import { Pokemon } from '../components/game-container/game-container';
+import { Pokemon } from '../components/game-container';
 import PokemonEntry from '../types/PokemonEntry';
 
 // the total length returned by the API is ~1100 but 898 is the highest I can get results on for some reason

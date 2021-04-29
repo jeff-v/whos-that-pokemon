@@ -1,12 +1,12 @@
 import React, { createContext, useState } from 'react';
 import './App.css';
 import { Link, Switch, Route } from 'react-router-dom';
-import GameContainer from './components/game-container/game-container';
 import PokemonEntry from './types/PokemonEntry';
 import initialPokedexContextState, {
   PokedexContextParams,
 } from './initialPokedexContextState';
-import PokedexEntry from './components/pokedex-entry/pokedex-entry';
+import GameContainer from './components/game-container';
+import PokedexEntry from './components/pokedex-entry';
 
 export const PokedexContext = createContext<PokedexContextParams>(
   {} as PokedexContextParams
