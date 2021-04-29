@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { nanoid } from 'nanoid';
 import { PokedexContext } from '../../App';
 import { Redirect, useParams } from 'react-router-dom';
-import convertToTitleCase from '../../util/convertToTitleCase';
+import { capitalCase } from 'change-case';
 
 interface Params {
   positionInPreviousPokemon: string;
@@ -16,8 +16,6 @@ export default function PokedexEntry() {
   if (pokedexState[0].id === 0) {
     return <Redirect to='/whos-that-pokemon' />;
   }
-
-  console.log(pokedexState);
 
   const {
     sprites,
@@ -43,7 +41,7 @@ export default function PokedexEntry() {
         src={sprites.front_default}
       />
       <div className='pokemon-info flex flex-col items-start ml-5 flex-grow'>
-        <div className='font-black text-xl'>{convertToTitleCase(name)}</div>
+        <div className='font-black text-xl'>{capitalCase(name)}</div>
         <div>
           <span className='font-extrabold'>ID:</span> {id}
         </div>
@@ -57,23 +55,25 @@ export default function PokedexEntry() {
           <span className='font-extrabold'>Type:</span>
           {types.map((type) => (
             <div className='flex flex-col ml-1 mr-1' key={nanoid()}>
-              {convertToTitleCase(type.type.name)}
+              {capitalCase(type.type.name)}
             </div>
           ))}
         </div>
-        <div>
-          <span className='font-extrabold'>Past Types:</span>
-          {past_types.map((pastType) =>
-            pastType.types.map((type) => (
-              <div key={nanoid()}>{convertToTitleCase(type.type.name)}</div>
-            ))
-          )}
-        </div>
+        {past_types.length > 0 && (
+          <div>
+            <span className='font-extrabold'>Past Types:</span>
+            {past_types.map((pastType) =>
+              pastType.types.map((type) => (
+                <div key={nanoid()}>{capitalCase(type.type.name)}</div>
+              ))
+            )}
+          </div>
+        )}
         <div className='flex'>
           <span className='font-extrabold'>Forms:</span>
           {forms.map((form) => (
             <div className='ml-1 mr-1' key={nanoid()}>
-              {convertToTitleCase(form.name)}
+              {capitalCase(form.name)}
             </div>
           ))}
         </div>
@@ -90,7 +90,7 @@ export default function PokedexEntry() {
             >
               <div className='whitespace-nowrap'>
                 <span className='font-semibold'>Name:</span>{' '}
-                {convertToTitleCase(stat.stat.name)}
+                {capitalCase(stat.stat.name)}
               </div>
               <div className='whitespace-nowrap'>
                 <span className='font-semibold'>Base Stat:</span>
@@ -112,7 +112,7 @@ export default function PokedexEntry() {
               >
                 <div>
                   <span className='font-semibold'>Name:</span>
-                  {convertToTitleCase(ability.ability.name)}
+                  {capitalCase(ability.ability.name)}
                 </div>
                 <div>
                   <span className='font-semibold'>Slot:</span> {ability.slot}
@@ -128,11 +128,13 @@ export default function PokedexEntry() {
           <div>
             <span className='font-extrabold'>Moves:</span>
           </div>
-          {moves.map((move) => (
-            <div className='ml-1 mr-1 flex flex-col' key={nanoid()}>
-              {convertToTitleCase(move.move.name)}
-            </div>
-          ))}
+          <ul className='flex flex-col items-start'>
+            {moves.map((move) => (
+              <li className='ml-1 mr-1 flex flex-col' key={nanoid()}>
+                {capitalCase(move.move.name)}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

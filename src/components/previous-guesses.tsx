@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { nanoid } from 'nanoid';
 import { Pokemon } from '../game-container/game-container';
-import convertToTitleCase from '../../util/convertToTitleCase';
+import { capitalCase } from 'change-case';
 import { Link } from 'react-router-dom';
 
 interface PreviousGuessesProps {
@@ -20,7 +20,7 @@ export default memo(function PreviousGuesses({
             src={singlePokemon.sprite}
           />
           <div className='font-extrabold'>
-            {convertToTitleCase(singlePokemon.name)}
+            {capitalCase(singlePokemon.name)}
           </div>
         </Link>
       </div>
