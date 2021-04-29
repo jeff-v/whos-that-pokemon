@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/whos-that-pokemon/static/css/main.de883511.chunk.css",
+    "main.js": "/whos-that-pokemon/static/js/main.9ea6099a.chunk.js",
+    "main.js.map": "/whos-that-pokemon/static/js/main.9ea6099a.chunk.js.map",
+    "runtime-main.js": "/whos-that-pokemon/static/js/runtime-main.75bfd994.js",
+    "runtime-main.js.map": "/whos-that-pokemon/static/js/runtime-main.75bfd994.js.map",
+    "static/js/2.61a599af.chunk.js": "/whos-that-pokemon/static/js/2.61a599af.chunk.js",
+    "static/js/2.61a599af.chunk.js.map": "/whos-that-pokemon/static/js/2.61a599af.chunk.js.map",
+    "static/js/3.5aa6e77d.chunk.js": "/whos-that-pokemon/static/js/3.5aa6e77d.chunk.js",
+    "static/js/3.5aa6e77d.chunk.js.map": "/whos-that-pokemon/static/js/3.5aa6e77d.chunk.js.map",
+    "index.html": "/whos-that-pokemon/index.html",
+    "static/css/main.de883511.chunk.css.map": "/whos-that-pokemon/static/css/main.de883511.chunk.css.map",
+    "static/js/2.61a599af.chunk.js.LICENSE.txt": "/whos-that-pokemon/static/js/2.61a599af.chunk.js.LICENSE.txt",
+    "static/media/pikapika.ac0cde3d.mp3": "/whos-that-pokemon/static/media/pikapika.ac0cde3d.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.75bfd994.js",
+    "static/js/2.61a599af.chunk.js",
+    "static/css/main.de883511.chunk.css",
+    "static/js/main.9ea6099a.chunk.js"
+  ]
+}
